@@ -28,8 +28,19 @@
     <div class="card mt-3">
         <div class="card-body text-center">
             <h5 class="card-title">{{ article.upper }}</h5>
+
             <h6 class="card-subtitle mb-2 text-muted">Автор: {{ article.author }}</h6>
             <p class="card-text">{{ article.content }}</p>
+            <span id="article-{{ article.id }}">Likes: {{ article.likes.count }}</span>
+            {% if request.user.is_authenticated %}
+                <a data-article-id="article-{{ article.id }}"
+                   class='likes'
+                   href="{% url "webapp:likes" article.pk %}">
+                    {% if request.user in article.likes.all %}Dislike
+                    {% else %}Like
+                    {% endif %}
+                </a>
+            {% endif %}
 
         </div>
     </div>
@@ -40,6 +51,16 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <p class="card-text">{{ comment.text }}</p>
+                        <span id="comment-{{ comment.id }}">Likes: {{ comment.comm_likes.count }}</span>
+                        {% if request.user.is_authenticated %}
+                            <a data-comment-id="comment-{{ comment.id }}"
+                               class='comment_likes'
+                               href="{% url "webapp:comment_like" comment.pk %}">
+                                {% if request.user in comment.comm_likes.count %}Dislike
+                                {% else %}Like
+                                {% endif %}
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="btn-group w-100"
                          role="group"

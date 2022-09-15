@@ -5,8 +5,8 @@ async function sendLikes(event) {
     let response = await fetch(url);
     let response_json = await response.json()
     let count = response_json.count
-    let articleId = target.dataset.articleId;
-    let span = document.getElementById(articleId)
+    let commentId = target.dataset.commentId;
+    let span = document.getElementById(commentId)
     span.innerText = `Likes: ${count}`;
     if (target.innerText === 'Dislike') {
         target.innerText = 'Like';
@@ -18,7 +18,7 @@ async function sendLikes(event) {
 
 
 function onLoad() {
-    let likes = document.getElementsByClassName('likes')
+    let likes = document.getElementsByClassName('comment_likes')
     for (let i = 0; i < likes.length; i++) {
         likes[i].addEventListener('click', sendLikes);
     }

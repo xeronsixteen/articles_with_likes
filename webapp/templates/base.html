@@ -62,10 +62,6 @@
     {% block content %}
         test
     {% endblock %}
-
-    <button id="push" data-articles-link="{% url 'webapp:index' %}">PUSH</button>
-
-
 </div>
 
 </body>
@@ -74,4 +70,5 @@
         crossorigin="anonymous"></script>
 
 <script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/commentlike.js' %}"></script>
 </html>
